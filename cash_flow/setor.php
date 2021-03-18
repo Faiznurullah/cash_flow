@@ -98,6 +98,7 @@ include 'config/koneksi.php';
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="setor.php">Setor Kas</a>
             <a class="collapse-item" href="daftar_kas.php">Daftar Kas</a>
+            <a class="collapse-item" href="nunda_kas.php">Nunda Kas</a>
             <a class="collapse-item" href="catat_out.php">Catat Pengeluaran</a>
             <a class="collapse-item" href="daftar_out.php">Daftar Pengeluaran</a>
           </div>
@@ -202,7 +203,7 @@ include 'config/koneksi.php';
               <select class="form-control" name='nama' required>
               <option selected disabled value="">Nama Anggota</option>
                 <?php
-                 $brg=mysqli_query($conn, "select * from anggota");
+                 $brg=mysqli_query($conn, "select * from anggota where level_kas = '0'");
                  while($b=mysqli_fetch_array($brg)){
                    ?>
                 <option value="<?php echo $b['nama']; ?>"><?php echo $b['nama']; ?></option>
@@ -210,6 +211,7 @@ include 'config/koneksi.php';
                    <?php } ?>
               </select>
               </div>
+
 
 
               <div class="col-sm-4">
@@ -232,11 +234,33 @@ include 'config/koneksi.php';
               <?php
 
 
-
                 if(isset($_POST['kirim'])){
                $nama = htmlspecialchars($_POST['nama']);
                $jumlah = htmlspecialchars($_POST['jumlah']);
                $date = htmlspecialchars($_POST['date']);
+               $levelw = 1;
+
+               $wet =mysqli_query($conn, "select * from kas where nama ='$nama'");
+               $chak = mysqli_num_rows($wet);
+               if($chak > 0){
+
+                 $rew = mysqli_fetch_array($wet);
+
+                 $nama  === $rew['nama'];
+
+
+
+                 echo "<div class='col-md-10 col-sm-12 col-xs-12 ml-5'>";
+                 echo "<div class='alert alert-warning mt-4 ml-5' role='alert'>";
+                 echo "<p><center>Data Yang Anda Kirim Sudah Tersedia</center></p>";
+                 echo   "</div>";
+                 echo "</div>";
+
+
+               }else{
+
+
+
 
 
                $insert = mysqli_query($conn, "INSERT INTO kas VALUES (
@@ -246,7 +270,13 @@ include 'config/koneksi.php';
                 '$date'
                   )");
 
-               if($insert){
+                  $levelw = mysqli_query($conn, "UPDATE anggota SET
+                 level_kas = '$levelw'
+                 WHERE nama ='".$nama."'
+                     ");
+
+
+               if($insert && $levelw){
                  echo "<div class='col-md-10 col-sm-12 col-xs-12'>";
                  echo "<div class='alert alert-primary mt-4 ml-5' role='alert'>";
                  echo "<p><center>Data Sudah Masuk</center></p>";
@@ -261,7 +291,7 @@ include 'config/koneksi.php';
 
                }
 
-
+}
 
                 }
 
@@ -284,11 +314,10 @@ include 'config/koneksi.php';
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span><p class="mb-1">Copyright &copy; <a href="https://github.com/Faiznurullah" style="text-decoration: none;"><b>Faiz Nurullah</b></a></p></span><br>
           </div>
         </div>
       </footer>
-      <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->

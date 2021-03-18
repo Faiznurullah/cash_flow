@@ -26,6 +26,7 @@ include 'config/koneksi.php';
         $jum_keluar = $row['id'];
 
 
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,6 +118,7 @@ include 'config/koneksi.php';
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="setor.php">Setor Kas</a>
             <a class="collapse-item" href="daftar_kas.php">Daftar Kas</a>
+            <a class="collapse-item" href="nunda_kas.php">Nunda Kas</a>
             <a class="collapse-item" href="catat_out.php">Catat Pengeluaran</a>
             <a class="collapse-item" href="daftar_out.php">Daftar Pengeluaran</a>
           </div>
@@ -299,7 +301,7 @@ include 'config/koneksi.php';
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span><p class="mb-1">Copyright &copy; <a href="https://github.com/Faiznurullah" style="text-decoration: none;"><b>Faiz Nurullah</b></a></p></span><br>
           </div>
         </div>
       </footer>

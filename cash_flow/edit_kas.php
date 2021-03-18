@@ -98,6 +98,7 @@ include 'config/koneksi.php';
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="setor.php">Setor Kas</a>
             <a class="collapse-item" href="daftar_kas.php">Daftar Kas</a>
+            <a class="collapse-item" href="nunda_kas.php">Nunda Kas</a>
             <a class="collapse-item" href="catat_out.php">Catat Pengeluaran</a>
             <a class="collapse-item" href="daftar_out.php">Daftar Pengeluaran</a>
           </div>
@@ -212,18 +213,6 @@ include 'config/koneksi.php';
           <div class="row ml-5 mb-2 mt-3">
             <div class="col-md-6">
 
-              <label>Nama Anggota:</label>
-              <select class="form-control" name='nama' required>
-              <option selected disabled value="">Nama Anggota</option>
-                <?php
-                 $brg=mysqli_query($conn, "select * from anggota");
-                 while($b=mysqli_fetch_array($brg)){
-                   ?>
-                <option value="<?php echo $b['nama']; ?>"><?php echo $b['nama']; ?></option>
-
-                   <?php } ?>
-              </select>
-
            <P><b>Jumlah:</b></p>
         <input class="form-control" type="number" name='jumlah' placeholder="Jumlah..."  value="<?php echo $d['jumlah']; ?>" required>
 
@@ -250,7 +239,7 @@ include 'config/koneksi.php';
 
           if(isset($_POST['edit'])){
 
-           $nama= htmlspecialchars($_POST['nama']);
+
            $jumlah= htmlspecialchars($_POST['jumlah']);
            $tanggal= htmlspecialchars($_POST['tanggal']);
 
@@ -258,7 +247,6 @@ include 'config/koneksi.php';
 
 
          $edit = mysqli_query($conn, "UPDATE kas SET
-        nama ='$nama',
         jumlah ='$jumlah',
         tanggal ='$tanggal'
         WHERE id ='".$_GET['id']."'
@@ -307,11 +295,10 @@ include 'config/koneksi.php';
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span><p class="mb-1">Copyright &copy; <a href="https://github.com/Faiznurullah" style="text-decoration: none;"><b>Faiz Nurullah</b></a></p></span><br>
           </div>
         </div>
       </footer>
-      <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->

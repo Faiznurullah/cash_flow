@@ -17,28 +17,40 @@ include './config/koneksi.php';
 
 
   <!--ini awal content-->
-  
+
   <h3><p class="text-center mt-4">Data Uang Kas</p></h3>
 
     <center><table class=" mt-4" width="1000px" border="1">
-        <tr>
-       <td><center>No</td>
-   		 <td><center>Nama Anggota</td>
-   		 <td><center>Jumlah</td>
-       <td><center>Tanggal Setor</td>
-         </tr>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Nama Anggota</th>
+        <th scope="col">Alamat</th>
+        <th scope="col">Umur</th>
+       </tr>
 
          <?php
-        	  $query = mysqli_query($conn, "SELECT * FROM kas");
+        	  $query = mysqli_query($conn, "SELECT * FROM anggota WHERE level_kas = '0'");
         	  while($row = mysqli_fetch_array($query)){
 
         	  ?>
+            <?php
+                  //tanggal lahir
+                  $tanggal = new DateTime($row['umur']);
+
+                  // tanggal hari ini
+                  $today = new DateTime('today');
+
+                  // tahun
+                  $y = $today->diff($tanggal)->y;
+
+            ?>
+
             <tr>
-            <td><center><?php echo $row['id'] ?></td>
-            <td><center><?php echo $row['nama'] ?></td>
-            <td><center><?php echo $row['jumlah'] ?></td>
-            <td><center><?php echo $row['tanggal'] ?></td>
-             </tr>
+              <th scope="row"><?php echo $row['id'] ?></th>
+              <td><?php echo $row['nama'] ?></td>
+              <td><?php echo $row['alamat'] ?></td>
+              <td><?php echo $y." Tahun"  ?></td>
+            </tr>
   <?php
   }
     ?>
@@ -48,7 +60,7 @@ include './config/koneksi.php';
 
     <?php
     header("Content-type: application/vnd.ms-excel");
-    header("Content-Disposition: attachment; filename= Data_kas.xls");
+    header("Content-Disposition: attachment; filename= Data_Nunda.xls");
     ?>
 
 
