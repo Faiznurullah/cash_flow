@@ -7,6 +7,7 @@
   <i>-CRUD Manajemen Anggota</i><br>
   <i>-CRUD Manajemen Pemasukan</i><br>
   <i>-CRUD Manajemen Pengeluaran</i><br>
+  <i>-Melihat Nunda Kas</i><br>
   <i>-Change Foto Dan Nama Admin</i><br>
   <i>-Change Password</i><br>
   
